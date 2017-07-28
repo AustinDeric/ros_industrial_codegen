@@ -1,0 +1,1 @@
+- git: {local-name: robodk_postprocessors, uri: 'https://github.com/ros-industrial-consortium/robodk_postprocessors.git', version: master}

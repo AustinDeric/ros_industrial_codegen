@@ -1,58 +1,26 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(robodk_postprocessors)
-add_compile_options(-std=c++11 -Wall -Wextra)
+project(ros_industrial_codegen)
 
-## Find catkin dependencies
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
+  rospy
   message_generation
 )
 
-################################################
-## Declare ROS messages, services and actions ##
-################################################
+add_service_files(FILES GenerateProgram.srv)
 
-add_action_files(
-  DIRECTORY
-  action
-  FILES
-  GenerateProgram.action
-)
+generate_messages()
 
-## Generate messages
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  actionlib_msgs
-)
-
-###################################
-## catkin specific configuration ##
-###################################
-
-## Define catkin exports
 catkin_package(
   CATKIN_DEPENDS
-  actionlib
   message_runtime
-  roscpp
+  rospy
 )
 
-###########
-## Build ##
-###########
-
-## Setup include dirs
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
 )
 
-#############
-## Install ##
-#############
-
-## Install scripts and executables
 install(PROGRAMS
   scripts/generate_program_server.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
